@@ -9,27 +9,33 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
-        // виділяєм память
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
 
-        System.out.println("Вас вітає казирно GoldBlue \n");
+        System.out.println("Вас вітає казино GoldBlue\n");
 
-        //получаєм інформацію від користувача
-        System.out.print("Введіть ставку: ");
-        double stake = scanner.nextDouble();
+        double bet = getBetFromUser(scanner);
 
-        // генеруєм рандомне число та виводим його
-        int randomNumber = random.nextInt(10) + 1;
-        // Генерувати випадкове число від 1 до 10
+        int randomNumber = generateRandomNumber(random);
         System.out.println("Випало число: " + randomNumber);
 
-        //виводим виграш в консоль
-        GameType game = new GameType(stake);
-        double win = game.calculateWin();
-        System.out.println("Виграш для гри типу A: " + win);
+        displayWinForGame(bet);
 
-        // закриваєм сканер
         scanner.close();
+    }
+
+    private static double getBetFromUser(Scanner scanner) {
+        System.out.print("Введіть вашу ставку: ");
+        return scanner.nextDouble();
+    }
+
+    private static int generateRandomNumber(Random random) {
+        return random.nextInt(10) + 1;
+    }
+
+    private static void displayWinForGame(double bet) {
+        GameType game = new GameType(bet);
+        double win = game.calculateWin();
+        System.out.println("Ваш виграш: " + win);
     }
 }
